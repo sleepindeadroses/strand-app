@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <!--<ion-buttons slot="start">
+      <ion-button color="primary" (click)="toggleCameraMenu()">
+        <ion-icon slot="icon-only" name="camera-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>-->
+
+    <ion-title color="danger">Strand</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button color="danger">
+        <ion-icon slot="icon-only" name="search-outline"></ion-icon>
+      </ion-button>
+      <ion-button color="danger">
+        <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar class="ion-no-padding">
+    <ion-title color="danger">Inicio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" pullFactor="0.5" pullMin="50" pullMax="100" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!--<app-users-stories [stories]="(stories$ | async)"></app-users-stories>-->
+  <app-users-posts [posts]="(news$ | async)" [isLoading]="newsIsLoading$ | async"></app-users-posts>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadDataNewsPagination($event)">
+    <ion-infinite-scroll-content loadingSpinner="lines"> </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
